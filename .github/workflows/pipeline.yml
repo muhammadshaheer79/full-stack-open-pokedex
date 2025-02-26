@@ -7,13 +7,13 @@ on:
 
 jobs:
   simple_deployment_pipeline:
-    runs-on: ubuntu 20.04
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-      - name: Instal dependencies
+      - name: Install dependencies
         run: npm install
-      - name: Check code formatting & style
+      - name: Lint
         run: npm run eslint
