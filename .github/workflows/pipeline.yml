@@ -15,10 +15,8 @@ jobs:
           node-version: "20"
       - name: Install dependencies
         run: npm install
-      - name: Install dependencies for CI setup
-        run: npm ci
       - name: Install Playwright Browsers
-        run: npx install playwright
+        run: npm install playwright
       - name: Lint
         run: npm run eslint
       - name: Build
