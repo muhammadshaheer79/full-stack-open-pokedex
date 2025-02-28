@@ -22,6 +22,6 @@ jobs:
       - name: Build
         run: npm run build
       - name: Tests (unit)
-        run: npm test
+        run: npm run test
       - name: Test (e2e w/ playwright)
         run: npm run test:e2e
