@@ -6,7 +6,7 @@ Since Python is my language of choice for the hypothetical scenario laid out, he
 
 -> For testing, pytest since its a complete testing framework, currently also among the best, and will most likely cover all of the project testing needs.
 
--> For building, pybuilders since it's a straight-forward versatile build tool and offers a lot of other features like code compilation, package management, configurability, efficiency, extensibility and testing support etc. etc. 
+-> For building, pybuilders since it's a straight-forward versatile build tool and offers a lot of other features like code compilation, package management, configurability, efficiency, extensibility and testing support etc. etc.
 
 Moving forward, there are plenty of other alternatives that can be used to set up CI besides Jenkins and Github Actions. For example, CircleCI, AzureDevOps and TravisCI to name a few. I will go ahead and pick CircleCI as it is cloud-based, reducing infrastructure management.
 Highly configurable and scalable. "Orbs" provide reusable configurations and integrations. Also offers good performance, and parallel processing capabilities.
