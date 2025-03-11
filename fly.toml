@@ -8,6 +8,10 @@ primary_region = 'sin'
 
 [build]
 
+[deploy]
+  strategy = "canary"
+  wait_timeout = "2m"
+  
 [env]
   PORT = "3000"
 
@@ -21,6 +25,13 @@ primary_region = 'sin'
   auto_start_machines = true
   min_machines_running = 0
   processes = ['app']
+
+[[http_service.checks]]
+  grace_period = "5s"
+  interval = "15s"
+  method = "GET"
+  timeout = "2s"
+  path = "/health"
 
 [[vm]]
   memory = '1gb'
