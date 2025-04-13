@@ -44,22 +44,14 @@ jobs:
         if: success()
         with:
           severity: info
-          username: fsoPart11Notifier
-          color: '#2ede32'
-          avatarUrl: https://github.githubassets.com/images/icons/emoji/unicode/264b.png?v8
-          description: Deployed to fly.io and live by muh-shaheer
-          text: New version of Pokedex was deployed successfully ✅
+          details: Pokedex app deployment succeeded and live.
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Failure Notification via Discord Webhook
         uses: rjstone/discord-webhook-notify@v1
         if: failure()
         with:
           severity: error
-          username: fsoPart11Notifier
-          color: '#e10e08'
-          avatarUrl: https://github.githubassets.com/images/icons/emoji/unicode/264b.png?v8
-          description: Latest commit to repo by muh-shaheer broke the build
-          text: Build failed ❌ 
+          details: Build failed.
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
 
