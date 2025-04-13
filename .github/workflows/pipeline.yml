@@ -40,14 +40,14 @@ jobs:
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
       - name: Success Notification Discord Webhook
-        uses: rjstone/discord-webhook-notify@v1.0.4
+        uses: rjstone/discord-webhook-notify@v1.0.2
         if: ${{ success() }}
         with:
             severity: info
             details: New Pokedex version deployed and live.
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Failure Notification Discord Webhook
-        uses: rjstone/discord-webhook-notify@v1.0.4
+        uses: rjstone/discord-webhook-notify@v1.0.2
         if: ${{ failure() }}
         with:
           severity: error
