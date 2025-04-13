@@ -39,20 +39,20 @@ jobs:
         run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-      - name: Success Notification Discord Webhook
-        uses: rjstone/discord-webhook-notify@v1.0.2
-        if: ${{ success() }}
+      - name: Discord Webhook Success Notification
+        if: ${{ steps.deploy.outcome == 'success' }}
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@master
         with:
-            severity: info
-            details: New Pokedex version deployed and live.
-            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-      - name: Failure Notification Discord Webhook
-        uses: rjstone/discord-webhook-notify@v1.0.2
+          args: 'New version of pokedex has been deployed and live. Link: https://fso-part11-mypokedexapp--cherry-77.fly.dev'
+      - name: Discord Webhook Failure Notification
         if: ${{ failure() }}
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@master
         with:
-          severity: error
-          details: Build failed.
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          args: 'Build failed'
      
   tag_release:
     needs: [simple_deployment_pipeline]
