@@ -1,0 +1,39 @@
+name: Pokedex Periodic Health Check
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches: [main]
+    types: [opened, synchornize]
+  schedule:
+    - cron: '0 0 29 2 *'
+
+jobs:
+  scheduled_check:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Pinging the deployed service URL
+        id: check
+        uses: jtalk/url-health-check-action@v4
+        with:
+          url: https://fso-part11-mypokedexapp--cherry-77.fly.dev/
+          follow-redirect: false
+          max-attempts: 3
+          retry-delay: 5
+          retry-all: false
+      - name: Pokedex Health Check Success
+        if: ${{ steps.check.outcome == 'success' }}
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD }}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: 'Service deployed at URL: https://fso-part11-mypokedexapp--cher..... is healthy'
+      - name: Pokedex Health Check Failure
+        if: ${{ failure() }}
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD }}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: 'Health check failed'
